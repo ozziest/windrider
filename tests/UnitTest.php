@@ -11,7 +11,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
      */
     public function testFalseData($data, $rules)
     {
-        $windrider = new Windrider([]);
+        $windrider = new Windrider();
         $result = $windrider->runOrFail($data, $rules);
     }
 
