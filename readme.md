@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ozziest/windrider.svg)](https://travis-ci.org/ozziest/windrider)
 [![Total Downloads](https://poser.pugx.org/ozziest/windrider/d/total.svg)](https://packagist.org/packages/ozziest/windrider)
-[![Latest Stable Version](https://poser.pugx.org/ozziest/windrider/v/stable.svg)](https://la.org/packages/ozziest/windrider)
+[![Latest Stable Version](https://poser.pugx.org/ozziest/windrider/v/stable.svg)](https://packagist.org/packages/ozziest/windrider)
 [![Latest Unstable Version](https://poser.pugx.org/ozziest/windrider/v/unstable.svg)](https://packagist.org/packages/ozziest/windrider)
 [![License](https://poser.pugx.org/ozziest/windrider/license.svg)](https://packagist.org/packages/ozziest/windrider)
 
