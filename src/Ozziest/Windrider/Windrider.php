@@ -52,7 +52,7 @@ class Windrider {
      * @param  array $message
      * @return null
      */
-    public function setErrorMessages($messages)
+    public function setErrors($messages)
     {
         $this->messages = $messages;
     }
