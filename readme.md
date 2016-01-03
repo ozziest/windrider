@@ -24,7 +24,7 @@ try
         ['name', 'Name', 'required'],
         ['email', 'E-Mail', 'required|valid_email']
     ];
-    $windrider = new Windrider();
+    $windrider = new \Ozziest\Windrider\Windrider();
     $result = $windrider->runOrFail($data, $rules);
 }
 catch (\Exception $exception)
