@@ -40,6 +40,22 @@ catch (\Exception $exception)
 - `getErrors()`
 - `setErrors($messages)`
 
+#### Validations
+
+- required
+- valid_email
+- min_length[n]
+- max_length[n]
+- exact_length[n]
+- alpha
+- alpha_numeric
+- alpha_dash
+- numeric
+- integer
+- is_natural
+- is_natural_no_zero
+- less_than[n]
+- greater_than[n]
 
 #### License
 
