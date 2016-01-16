@@ -1,7 +1,7 @@
 {
     "name": "ozziest/windrider",
     "description": "Usefull form validation library",
-    "keywords": ["php", "form validation", "undependent"],
+    "keywords": ["php", "form validation", "independent"],
     "homepage": "http://github.com/ozziest/windrider",
     "authors": [
         {
