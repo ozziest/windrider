@@ -95,7 +95,7 @@ class Windrider {
                 // Kural çalıştırılır
                 if ($rule->name === 'required' || ($rule->name !== 'required' && $defined))
                 {
-                    $result = call_user_func_array([self, $rule->name], [$fieldValue, $rule->arg]);
+                    $result = call_user_func_array([__NAMESPACE__ .'\Windrider', $rule->name], [$fieldValue, $rule->arg]);
                     // Hata kontrol edilir
                     if ($result === false) 
                     {
