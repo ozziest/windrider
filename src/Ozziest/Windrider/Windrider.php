@@ -1,7 +1,5 @@
 <?php namespace Ozziest\Windrider;
 
-use Exception;
-
 class Windrider {
 
     /**
@@ -9,7 +7,7 @@ class Windrider {
      *
      * @var array
      */
-    private $messages = [
+    private static $messages = [
             'required'           => "The {1} field is required.",
             'valid_email'        => "The {1} field must contain a valid email address.",
             'min_length'         => "The {1} field must be at least {2} characters in length.",
@@ -30,20 +28,27 @@ class Windrider {
         ];
 
     /**
+     * Data
+     *
+     * @var array
+     */
+    private static $data = [];
+
+    /**
      * Error list 
      *
      * @var array
      */
-    private $errors = [];
+    private static $errors = [];
 
     /**
      * This method returns the error array
      *
      * @return array
      */
-    public function getErrors()
+    public static function getErrors()
     {
-        return $this->errors;
+        return self::$errors;
     }
 
     /**
@@ -52,9 +57,9 @@ class Windrider {
      * @param  array $message
      * @return null
      */
-    public function setErrors($messages)
+    public static function setErrors($messages)
     {
-        $this->messages = $messages;
+        self::$messages = $messages;
     }
 
     /**
@@ -64,16 +69,17 @@ class Windrider {
      *
      * @return  bool
      */
-    public function run($data, $rules)
+    public static function run($data, $rules)
     {
-        $this->data = $data;
+        self::$errors = [];
+        self::$data = $data;
         $status = true;
         foreach ($rules as $key => $value) 
         {
             // Temel ayarlamalar
             $field = $value[0];
             $name  = $value[1];
-            $ruleArray = $this->parseRules($value[2]);            
+            $ruleArray = self::parseRules($value[2]);            
             $fieldValue = '';
 
             // Veri gönderilmiş mi?
@@ -82,22 +88,22 @@ class Windrider {
                 $fieldValue = $data[$field];
             }
             
-            $defined = $this->required($fieldValue);
+            $defined = self::required($fieldValue);
 
             foreach ($ruleArray as $sub => $rule) 
             {
                 // Kural çalıştırılır
                 if ($rule->name === 'required' || ($rule->name !== 'required' && $defined))
                 {
-                    $result = call_user_func_array([$this, $rule->name], [$fieldValue, $rule->arg]);
+                    $result = call_user_func_array([self, $rule->name], [$fieldValue, $rule->arg]);
                     // Hata kontrol edilir
                     if ($result === false) 
                     {
                         $status = false;
-                        $message = $this->messages[$rule->name];
+                        $message = self::$messages[$rule->name];
                         $message = str_replace('{1}', $name, $message);
                         $message = str_replace('{2}', $rule->arg, $message);
-                        array_push($this->errors, $message);
+                        array_push(self::$errors, $message);
                     }                    
                 }
             }
@@ -105,11 +111,11 @@ class Windrider {
         return $status;
     }
 
-    public function runOrFail($data, $rules)
+    public static function runOrFail($data, $rules)
     {
-        if ($this->run($data, $rules) === false)
+        if (self::run($data, $rules) === false)
         {
-            throw new Exception('Form validation error!');
+            throw new ValidationException('Form validation error!');
         }
         return true;
     }
@@ -120,7 +126,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function required($str)
+    public static function required($str)
     {
         return is_array($str) ? (bool) count($str) : (trim($str) !== '');
     }
@@ -132,7 +138,7 @@ class Windrider {
      * @param   regex
      * @return  bool
      */
-    public function regex_match($str, $regex)
+    public static function regex_match($str, $regex)
     {
         return (bool) preg_match($regex, $str);
     }
@@ -144,10 +150,10 @@ class Windrider {
      * @param   field
      * @return  bool
      */
-    public function matches($str, $field)
+    public static function matches($str, $field)
     {
-        return isset($this->data[$field], $this->data[$field])
-                    ? ($str === $this->data[$field])
+        return isset(self::$data[$field], self::$data[$field])
+                    ? ($str === self::$data[$field])
                     : FALSE;
 
     }
@@ -159,7 +165,7 @@ class Windrider {
      * @param   value
      * @return  bool
      */
-    public function min_length($str, $val)
+    public static function min_length($str, $val)
     {
         if (!is_numeric($val))
         {
@@ -175,7 +181,7 @@ class Windrider {
      * @param   value
      * @return  bool
      */
-    public function max_length($str, $val)
+    public static function max_length($str, $val)
     {
         if ( ! is_numeric($val))
         {
@@ -191,7 +197,7 @@ class Windrider {
      * @param   value
      * @return  bool
      */
-    public function exact_length($str, $val)
+    public static function exact_length($str, $val)
     {
         if ( ! is_numeric($val))
         {
@@ -206,7 +212,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function valid_email($str)
+    public static function valid_email($str)
     {
         if (function_exists('idn_to_ascii') && $atpos = strpos($str, '@'))
         {
@@ -221,7 +227,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function alpha($str)
+    public static function alpha($str)
     {
         return ctype_alpha($str);
     }
@@ -232,7 +238,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function alpha_numeric($str)
+    public static function alpha_numeric($str)
     {
         return ctype_alnum((string) $str);
     }
@@ -243,7 +249,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function alpha_dash($str)
+    public static function alpha_dash($str)
     {
         return (bool) preg_match('/^[a-z0-9_-]+$/i', $str);
     }
@@ -254,7 +260,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function numeric($str)
+    public static function numeric($str)
     {
         return (bool) preg_match('/^[\-+]?[0-9]*\.?[0-9]+$/', $str);
     }
@@ -265,7 +271,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function integer($str)
+    public static function integer($str)
     {
         return (bool) preg_match('/^[\-+]?[0-9]+$/', $str);
     }
@@ -276,7 +282,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function decimal($str)
+    public static function decimal($str)
     {
         return (bool) preg_match('/^[\-+]?[0-9]+\.[0-9]+$/', $str);
     }
@@ -287,7 +293,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function greater_than($str, $min)
+    public static function greater_than($str, $min)
     {
         return is_numeric($str) ? ($str > $min) : FALSE;
     }
@@ -298,7 +304,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function less_than($str, $max)
+    public static function less_than($str, $max)
     {
         return is_numeric($str) ? ($str < $max) : FALSE;
     }
@@ -309,7 +315,7 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function is_natural($str)
+    public static function is_natural($str)
     {
         return ctype_digit((string) $str);
     }
@@ -320,13 +326,13 @@ class Windrider {
      * @param   string
      * @return  bool
      */
-    public function is_natural_no_zero($str)
+    public static function is_natural_no_zero($str)
     {
         return ($str != 0 && ctype_digit((string) $str));
     }
 
 
-    private function parseRules($string)
+    private static function parseRules($string)
     {
         $ruleArray = [];
         foreach (explode('|', $string) as $key => $value) 

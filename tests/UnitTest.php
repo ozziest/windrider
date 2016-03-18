@@ -11,8 +11,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
      */
     public function testFalseData($data, $rules)
     {
-        $windrider = new Windrider();
-        $result = $windrider->runOrFail($data, $rules);
+        $result = Windrider::runOrFail($data, $rules);
     }
 
     /**
@@ -20,8 +19,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
      */
     public function testAcceptable($data, $rules)
     {
-        $windrider = new Windrider([]);
-        $result = $windrider->runOrFail($data, $rules);
+        $result = Windrider::runOrFail($data, $rules);
         $this->assertTrue($result);
     }
 

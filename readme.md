@@ -24,12 +24,11 @@ try
         ['name', 'Name', 'required'],
         ['email', 'E-Mail', 'required|valid_email']
     ];
-    $windrider = new \Ozziest\Windrider\Windrider();
-    $result = $windrider->runOrFail($data, $rules);
+    $result = Ozziest\Windrider\Windrider::runOrFail($data, $rules);
 }
-catch (\Exception $exception)
+catch (Exception $exception)
 {
-    var_dump($windrider->getErrors());
+    var_dump(Ozziest\Windrider\Windrider::getErrors());
 }
 ```
 
@@ -56,6 +55,10 @@ catch (\Exception $exception)
 - is_natural_no_zero
 - less_than[n]
 - greater_than[n]
+
+#### Exception 
+
+[ValidationException](src/Ozziest/Windrider/ValidationException.php)
 
 #### License
 
