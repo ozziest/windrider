@@ -24,7 +24,7 @@ try
         ['name', 'Name', 'required'],
         ['email', 'E-Mail', 'required|valid_email']
     ];
-    $result = Ozziest\Windrider\Windrider::runOrFail($data, $rules);
+    Ozziest\Windrider\Windrider::runOrFail($data, $rules);
 }
 catch (Exception $exception)
 {
