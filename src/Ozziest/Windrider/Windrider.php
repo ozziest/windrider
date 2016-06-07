@@ -93,7 +93,7 @@ class Windrider {
             foreach ($ruleArray as $sub => $rule) 
             {
                 // Kural çalıştırılır
-                if ($rule->name === 'required' || ($rule->name !== 'required' && $defined))
+                if (strlen($rule->name) > 0 && ($rule->name === 'required' || ($rule->name !== 'required' && $defined)))
                 {
                     $result = call_user_func_array([__NAMESPACE__ .'\Windrider', $rule->name], [$fieldValue, $rule->arg]);
                     // Hata kontrol edilir
