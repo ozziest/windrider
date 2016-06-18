@@ -35,18 +35,13 @@ class Windrider {
     private static $data = [];
 
     /**
-<<<<<<< HEAD
      * Error list
-=======
-     * Error list 
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
      *
      * @var array
      */
     private static $errors = [];
 
     /**
-<<<<<<< HEAD
      * Prefix
      *
      * @var string
@@ -54,8 +49,6 @@ class Windrider {
     private static $prefix = "";
 
     /**
-=======
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
      * This method returns the error array
      *
      * @return array
@@ -66,7 +59,6 @@ class Windrider {
     }
 
     /**
-<<<<<<< HEAD
      * This method sets the prefix
      *
      * @param  string   $prefix
@@ -88,8 +80,6 @@ class Windrider {
     }
 
     /**
-=======
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
      * This method sets the error messages
      *
      * @param  array $message
@@ -112,20 +102,12 @@ class Windrider {
         self::$errors = [];
         self::$data = $data;
         $status = true;
-<<<<<<< HEAD
         foreach ($rules as $key => $value)
-=======
-        foreach ($rules as $key => $value) 
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
         {
             // Temel ayarlamalar
             $field = $value[0];
             $name  = $value[1];
-<<<<<<< HEAD
             $ruleArray = self::parseRules($value[2]);
-=======
-            $ruleArray = self::parseRules($value[2]);            
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
             $fieldValue = '';
 
             // Veri gönderilmiş mi?
@@ -133,42 +115,24 @@ class Windrider {
             {
                 $fieldValue = $data[$field];
             }
-<<<<<<< HEAD
 
             $defined = self::required($fieldValue);
 
             foreach ($ruleArray as $sub => $rule)
             {
                 // Kural çalıştırılır
-                if ($rule->name === 'required' || ($rule->name !== 'required' && $defined))
-                {
-                    $result = call_user_func_array([__NAMESPACE__ .'\Windrider', $rule->name], [$fieldValue, $rule->arg]);
-                    // Hata kontrol edilir
-                    if ($result === false)
-=======
-            
-            $defined = self::required($fieldValue);
-
-            foreach ($ruleArray as $sub => $rule) 
-            {
-                // Kural çalıştırılır
                 if (strlen($rule->name) > 0 && ($rule->name === 'required' || ($rule->name !== 'required' && $defined)))
                 {
                     $result = call_user_func_array([__NAMESPACE__ .'\Windrider', $rule->name], [$fieldValue, $rule->arg]);
                     // Hata kontrol edilir
-                    if ($result === false) 
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
+                    if ($result === false)
                     {
                         $status = false;
                         $message = self::$messages[$rule->name];
                         $message = str_replace('{1}', $name, $message);
                         $message = str_replace('{2}', $rule->arg, $message);
                         array_push(self::$errors, $message);
-<<<<<<< HEAD
                     }
-=======
-                    }                    
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
                 }
             }
         }
@@ -399,11 +363,7 @@ class Windrider {
     private static function parseRules($string)
     {
         $ruleArray = [];
-<<<<<<< HEAD
         foreach (explode('|', $string) as $key => $value)
-=======
-        foreach (explode('|', $string) as $key => $value) 
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
         {
             $name = $value;
             $arg = '';
@@ -411,31 +371,17 @@ class Windrider {
             {
                 $name = substr($value, 0, strpos($value, '['));
                 $arg = substr(
-<<<<<<< HEAD
                     $value,
                     strpos($value, '[') + 1,
-=======
-                    $value, 
-                    strpos($value, '[') + 1, 
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
                     strpos($value, ']') - strpos($value, '[') - 1
                 );
             }
             array_push($ruleArray, (object) [
-<<<<<<< HEAD
                 'name' => $name,
-=======
-                'name' => $name, 
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
                 'arg'  => $arg
             ]);
         }
         return $ruleArray;
-<<<<<<< HEAD
     }
 
-=======
-    }    
-    
->>>>>>> 78a3315bd7560a447262091a2133f0326046c774
 }
