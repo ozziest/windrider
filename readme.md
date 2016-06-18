@@ -6,9 +6,9 @@
 [![Latest Unstable Version](https://poser.pugx.org/ozziest/windrider/v/unstable.svg)](https://packagist.org/packages/ozziest/windrider)
 [![License](https://poser.pugx.org/ozziest/windrider/license.svg)](https://packagist.org/packages/ozziest/windrider)
 
-Windrider is a simple and useful validation library which you can use it on your projects. 
+Windrider is a simple and useful validation library which you can use it on your projects.
 
-#### Installation 
+#### Installation
 
 ```
 $ composer require ozziest/windrider
@@ -16,15 +16,15 @@ $ composer require ozziest/windrider
 
 #### Usage
 
-```php 
-try 
+```php
+try
 {
     $data = ['name' => ''];
     $rules = [
         ['name', 'Name', 'required'],
         ['email', 'E-Mail', 'required|valid_email']
     ];
-    $result = Ozziest\Windrider\Windrider::runOrFail($data, $rules);
+    Ozziest\Windrider\Windrider::runOrFail($data, $rules);
 }
 catch (Exception $exception)
 {
@@ -56,7 +56,7 @@ catch (Exception $exception)
 - less_than[n]
 - greater_than[n]
 
-#### Exception 
+#### Exception
 
 [ValidationException](src/Ozziest/Windrider/ValidationException.php)
 
