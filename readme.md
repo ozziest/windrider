@@ -50,6 +50,7 @@ catch (Exception $exception)
 - alpha_numeric
 - alpha_dash
 - alpha_local (Turkish characters support)
+- sentence (Turkish characters support)
 - numeric
 - integer
 - is_natural

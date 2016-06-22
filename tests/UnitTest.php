@@ -92,6 +92,13 @@ class UnitTest extends PHPUnit_Framework_TestCase {
             ],
 
             [
+                ['foo' => 'Örnek bir Türkçe karakter içeren, testi geçmesi gereken cümle.:;!"\'â+%=?*<>'],
+                [
+                    ['foo', 'Foo Field', 'sentence']
+                ]
+            ],
+
+            [
                 ['foo' => '12'],
                 [
                     ['foo', 'Foo Field', 'numeric']
@@ -201,6 +208,13 @@ class UnitTest extends PHPUnit_Framework_TestCase {
                 ['foo' => 'Türkçe ve .'],
                 [
                     ['foo', 'Foo Field', 'alpha_local']
+                ]
+            ],
+
+            [
+                ['foo' => 'Türkçe ve geçersiz bir () karakteri'],
+                [
+                    ['foo', 'Foo Field', 'sentence']
                 ]
             ],
 

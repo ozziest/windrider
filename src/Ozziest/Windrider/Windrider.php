@@ -16,7 +16,8 @@ class Windrider {
             'alpha'              => "The {1} field may only contain alphabetical characters.",
             'alpha_numeric'      => "The {1} field may only contain alpha-numeric characters.",
             'alpha_dash'         => "The {1} field may only contain alpha-numeric characters, underscores, and dashes.",
-            'alpha_local'        => "The {1} field may only contain alpha-numeric characters, underscores, and dashes. Please don't use the dot.",
+            'alpha_local'        => "The {1} field may only contain alpha-numeric characters, underscores, and dashes.",
+            'sentence'           => "The {1} field may only contain a sentence.",
             'numeric'            => "The {1} field must contain only numbers.",
             'integer'            => "The {1} field must contain an integer.",
             'regex_match'        => "The {1} field is not in the correct format.",
@@ -294,6 +295,19 @@ class Windrider {
         $str = preg_replace('/\s+/', '', $str);
         $str = str_replace(' ', '', $str);
         return (bool) preg_match('/^[a-z0-9_-ğüşıöçĞÜŞİÖÇ]+$/i', $str);
+    }
+
+    /**
+     * Sentence
+     *
+     * @param   string
+     * @return  bool
+     */
+    public static function sentence($str)
+    {
+        $str = preg_replace('/\s+/', '', $str);
+        $str = str_replace(' ', '', $str);
+        return (bool) preg_match('/^[a-z0-9_-ğüşıöçĞÜŞİÖÇ,.:;!"\'â+%=?*<>]+$/i', $str);
     }
 
     /**
