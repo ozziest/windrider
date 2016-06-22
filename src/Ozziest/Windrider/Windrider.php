@@ -294,7 +294,7 @@ class Windrider {
     {
         $str = preg_replace('/\s+/', '', $str);
         $str = str_replace(' ', '', $str);
-        return (bool) preg_match('/^[a-z0-9_-ğüşıöçĞÜŞİÖÇ]+$/i', $str);
+        return (bool) preg_match('/^[a-z0-9_-ğüşıöçĞÜŞİÖÇ\']+$/i', $str);
     }
 
     /**
