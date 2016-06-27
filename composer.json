@@ -1,0 +1,23 @@
+{
+    "name": "ozziest/windrider",
+    "description": "Usefull form validation library",
+    "keywords": ["php", "form validation", "independent"],
+    "homepage": "http://github.com/ozziest/windrider",
+    "authors": [
+        {
+            "name": "Özgür Adem Işıklı",
+            "email": "i.ozguradem@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Ozziest\\Windrider\\": "src"
+        }
+    },    
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "license": "MIT"
+}
