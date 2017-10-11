@@ -11,7 +11,7 @@ class UnitTest extends PHPUnit_Framework_TestCase {
      */
     public function testFalseData($data, $rules)
     {
-        $result = Windrider::runOrFail($data, $rules);
+        $result = Windrider::runOrFail($this->toObject($data), $rules);
     }
 
     /**
@@ -19,15 +19,18 @@ class UnitTest extends PHPUnit_Framework_TestCase {
      */
     public function testAcceptable($data, $rules)
     {
-        $result = Windrider::runOrFail($data, $rules);
+        $result = Windrider::runOrFail($this->toObject($data), $rules);
         $this->assertTrue($result);
     }
 
+    public function toObject($data)
+    {
+        return json_decode(json_encode($data));
+    }
 
     public function AcceptableDataProvider()
     {
         return [
-
             [
                 ['foo' => 'bar'],
                 [
