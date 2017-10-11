@@ -113,9 +113,9 @@ class Windrider {
             $fieldValue = '';
 
             // Veri gönderilmiş mi?
-            if (isset($data[$field]))
+            if (isset($data->{$field}))
             {
-                $fieldValue = $data[$field];
+                $fieldValue = $data->{$field};
             }
 
             $defined = self::required($fieldValue);
